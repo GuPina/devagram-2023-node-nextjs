@@ -50,7 +50,7 @@ const handler = nc()
         }
 });
 
-export const congig = {
+export const config = {
     api: {
         bodyParser : false
     }
