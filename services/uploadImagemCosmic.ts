@@ -1,7 +1,8 @@
 import multer from "multer";
 import cosmicjs from "cosmicjs";
 
-const {CHAVE_GRAVACAO_AVATARES,
+const {
+    CHAVE_GRAVACAO_AVATARES,
     CHAVE_GRAVACAO_PUBLICACOES,
     BUCKET_AVATARES,
     BUCKET_PUBLICACOES} = process.env;
@@ -19,7 +20,7 @@ const bucketPublicacoes = Cosmic.bucket({
 });
 
 const storage = multer.memoryStorage();
-const upload = multer({storage : storage});
+const updload = multer({storage : storage});
 
 const uploadImagemCosmic = async(req : any) => {
     console.log('uploadImagemCosmic', req);
@@ -39,4 +40,4 @@ const uploadImagemCosmic = async(req : any) => {
     }
 }
 
-export {upload, uploadImagemCosmic};
+export {updload, uploadImagemCosmic};

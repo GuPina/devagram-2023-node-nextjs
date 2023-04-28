@@ -4,11 +4,11 @@ import type {CadastroRequisicao} from '../../types/CadastroRequisicao';
 import {UsuarioModel} from '../../models/UsuarioModel';
 import {conectarMongoDB} from '../../middlewares/conectarMongoDB';
 import md5 from 'md5';
-import {upload, uploadImagemCosmic} from'../../services/uploadImagemCosmic'
+import {updload, uploadImagemCosmic} from'../../services/uploadImagemCosmic'
 import nc from 'next-connect';
 
 const handler = nc()
-    .use(upload.single('file'))
+    .use(updload.single('file'))
     .post(async (req : NextApiRequest, res : NextApiResponse<respostaPadraoMsg>) => {
         try{
             console.log('Cadastro endpoint', req.body);
@@ -24,16 +24,16 @@ const handler = nc()
                 return res.status(400).json({erro : 'Email invalido'});
             }
 
-                if(!usuario.senha || usuario.senha.length < 4){
+            if(!usuario.senha || usuario.senha.length < 4){
                     return res.status(400).json({erro : 'Senha invalida'});
             }
 
-                const usuariosComMesmoEmail = await UsuarioModel.find({email : usuario.email});
-                if(usuariosComMesmoEmail && usuariosComMesmoEmail.length > 0){
-                    return res.status(400).json({erro : 'Já existe uma conta com o email informado'});
+            const usuariosComMesmoEmail = await UsuarioModel.find({email : usuario.email});
+            if(usuariosComMesmoEmail && usuariosComMesmoEmail.length > 0){
+                return res.status(400).json({erro : 'Já existe uma conta com o email informado'});
             }
 
-                const image = await uploadImagemCosmic(req);
+            const image = await uploadImagemCosmic(req);
 
 
                 const usuarioASerSalvo = {
