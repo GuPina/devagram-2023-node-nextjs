@@ -8,7 +8,7 @@ import { PublicacaoModel } from '../../models/publicacaoModel';
 const feedEndpoint = async (req : NextApiRequest, res : NextApiResponse<respostaPadraoMsg | any>) => {
     try{
         if(req.method === 'GET'){
-            if(req?.query?.id){
+            if(!req?.query?.id){
                 const usuario = await UsuarioModel.findById(req?.query?.id);
                 if(!usuario){
                     return res.status(400).json({erro : 'Usuario nao encontrado'});
