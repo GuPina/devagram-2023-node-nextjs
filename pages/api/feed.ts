@@ -18,7 +18,8 @@ const feedEndpoint = async (req : NextApiRequest, res : NextApiResponse<resposta
                 const publicacoes = await PublicacaoModel
                     .find({idUsuario : usuario._id})
                     .sort({data : -1});
-                    return res.status(200).json(publicacoes);
+                    
+                return res.status(200).json(publicacoes);
             }
         }
         return res.status(405).json({erro : 'Metodo informado não é valido'})
