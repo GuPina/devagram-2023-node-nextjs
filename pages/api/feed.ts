@@ -6,6 +6,7 @@ import { UsuarioModel } from "../../models/UsuarioModel";
 import { PublicacaoModel } from '../../models/publicacaoModel';
 import publicacao from "./publicacao";
 import { SeguidorModel } from "../../models/seguidorModel";
+import { politicaCors } from "../../middlewares/politicaCors";
 
 const feedEndpoint = async (req : NextApiRequest, res : NextApiResponse<respostaPadraoMsg | any>) => {
     try{
@@ -62,4 +63,4 @@ const feedEndpoint = async (req : NextApiRequest, res : NextApiResponse<resposta
     return res.status(400).json({erro : 'Usuario não encontrado'})
 }
 
-export default validarTokenJWT(conectarMongoDB(feedEndpoint));
+export default politicaCors(validarTokenJWT(conectarMongoDB(feedEndpoint)));
