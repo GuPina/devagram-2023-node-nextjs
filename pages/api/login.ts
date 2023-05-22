@@ -4,7 +4,7 @@ import type {respostaPadraoMsg} from '../../types/respostaPadraoMsg';
 import type {LoginResposta} from '../../types/LoginResposta';
 import md5 from 'md5';
 import { UsuarioModel } from '../../models/UsuarioModel';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 import { politicaCors } from '../../middlewares/politicaCors';
 
 
@@ -14,7 +14,7 @@ const endpointLogin = async (
 ) => {
     const {MINHA_CHAVE_JWT} = process.env;
     if(!MINHA_CHAVE_JWT){
-        res.status(500).json({erro : 'ENV jwt  nao informada'});
+        return res.status(500).json({erro : 'ENV jwt  nao informada'});
     }
 
     if(req.method === 'POST'){
